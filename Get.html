@@ -20,20 +20,30 @@
         .container {
             text-align: center;
             background: #1e1e1e;
-            padding: 40px 30px;
+            padding: 30px;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            max-width: 400px;
-            width: 90%;
+            max-width: 800px; /* تم تكبير الحاوية لتناسب البنر العريض */
+            width: 95%;
         }
-        .loading-holder {
-            margin: 30px 0;
+        .ad-container {
+            width: 100%;
+            min-height: 90px;
+            background: #2d2d2d;
+            margin: 25px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #4ea8de;
+            border-radius: 8px;
+            overflow: hidden;
         }
         .btn {
             background-color: #2ed573;
             color: white;
             border: none;
-            padding: 14px 35px;
+            padding: 14px 40px;
             font-size: 18px;
             font-weight: bold;
             border-radius: 8px;
@@ -50,30 +60,42 @@
             font-size: 20px;
             color: #ffa500;
             font-weight: bold;
+            margin-bottom: 10px;
         }
         .checkmark {
             color: #2ed573;
-            font-size: 50px;
+            font-size: 45px;
             display: none;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>جاري فحص وتجهيز الراب الحصري...</h2>
+    <h2>بوابة فحص وتجهيز رابط التحميل الآمن</h2>
     
-    <div class="loading-holder">
-        <div id="countdown" class="timer">يرجى الانتظار: <span id="seconds">5</span> ثوانٍ...</div>
-        <div id="check" class="checkmark">✓</div>
+    <div class="ad-container">
+        <script type="text/javascript">
+            atOptions = {
+                'key' : '31a0ae1f292dff183db1d181d1c9997d',
+                'format' : 'iframe',
+                'height' : 90,
+                'width' : 728,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="https://www.highperformanceformat.com/31a0ae1f292dff183db1d181d1c9997d/invoke.js"></script>
     </div>
 
-    <a href="https://www.effectivecpmnetwork.com/ybb0qmae1w?key=533cf0d827a1c2debb099bb5aec916e4" target="_blank" id="download-btn" class="btn">اضغط هنا للانتقال للرابط</a>
+    <div id="countdown" class="timer">يرجى الانتظار: <span id="seconds">5</span> ثوانٍ...</div>
+    <div id="check" class="checkmark">✓ جاهز للتحميل</div>
+
+    <a href="https://itch.io" id="download-btn" class="btn">اضغط هنا لتحميل اللعبة والبدء</a>
 </div>
 
 <script>
-    var timeLeft = 5; // عدد ثواني الانتظار
+    var timeLeft = 5; 
     var timerElement = document.getElementById('countdown');
     var secondsElement = document.getElementById('seconds');
     var checkElement = document.getElementById('check');

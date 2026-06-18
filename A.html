@@ -1,105 +1,215 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوابة التحميل الآمنة</title>
+    <title>Safe Download Gateway</title>
     
     <style>
+        :root {
+            --bg-color: #0b0c10;
+            --card-bg: #1f2833;
+            --accent-cyan: #66fcf1;
+            --yt-red: #ff4757;
+            --download-green: #2ed573;
+            --text-main: #ffffff;
+            --text-muted: #c5c6c7;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background: radial-gradient(circle at center, #1f2833 0%, var(--bg-color) 100%);
+            color: var(--text-main);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
         }
+
         .container {
             text-align: center;
-            background: #1e1e1e;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            max-width: 400px;
-            width: 90%;
+            background: rgba(31, 40, 51, 0.85);
+            padding: 45px 30px;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            max-width: 780px;
+            width: 100%;
+            border: 1px solid rgba(102, 252, 241, 0.1);
+            backdrop-filter: blur(10px);
         }
+
+        .security-badge {
+            background: rgba(102, 252, 241, 0.1);
+            color: var(--accent-cyan);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 15px;
+            border: 1px solid rgba(102, 252, 241, 0.2);
+        }
+
+        h2 {
+            font-size: 26px;
+            font-weight: 600;
+            margin: 0 0 8px 0;
+        }
+
+        .game-display {
+            color: var(--accent-cyan);
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(102, 252, 241, 0.3);
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
         .ad-container {
             width: 100%;
-            min-height: 250px;
-            background: #2d2d2d;
-            margin: 20px 0;
+            min-height: 90px;
+            background: #0b0c10;
+            margin: 25px 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            border: 2px dashed #ff4757;
+            border: 1px dashed rgba(102, 252, 241, 0.3);
             border-radius: 10px;
             overflow: hidden;
         }
-        .btn {
-            background-color: #2ed573;
-            color: white;
-            border: none;
-            padding: 12px 30px;
+
+        .status-wrapper {
+            margin: 25px 0;
+            min-height: 40px;
+        }
+
+        .timer {
+            font-size: 16px;
+            color: #ffa500;
+            letter-spacing: 0.5px;
+        }
+
+        .timer span.box {
+            font-weight: 700;
+            background: rgba(255, 165, 0, 0.1);
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 165, 0, 0.2);
+        }
+
+        .checkmark {
+            color: var(--download-green);
             font-size: 18px;
-            font-weight: bold;
+            font-weight: 600;
+            display: none;
+        }
+
+        .buttons-wrapper {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            color: #0b0c10;
+            border: none;
+            padding: 14px 32px;
+            font-size: 15px;
+            font-weight: 700;
             border-radius: 8px;
             cursor: pointer;
-            display: none; /* مخفي وسيظهر بعد انتهاء العداد */
-            text-decoration: none;
-            transition: background 0.3s ease;
-        }
-        .btn:hover {
-            background-color: #26af5f;
-        }
-        .timer {
-            font-size: 18px;
-            color: #ffa500;
-            font-weight: bold;
-        }
-        .checkmark {
-            color: #2ed573;
-            font-size: 40px;
             display: none;
-            margin-bottom: 10px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-youtube {
+            background-color: var(--yt-red);
+            color: white;
+        }
+
+        .btn-youtube:hover {
+            background-color: #ff6b81;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 71, 87, 0.3);
+        }
+
+        .btn-download {
+            background-color: var(--accent-cyan);
+        }
+
+        .btn-download:hover {
+            background-color: #45f3ff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 252, 241, 0.4);
+        }
+
+        @media (max-width: 600px) {
+            .buttons-wrapper { flex-direction: column; width: 100%; }
+            .btn { width: 100%; box-sizing: border-box; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>جاري تجهيز رابط اللعبة...</h2>
+    <div class="security-badge">🛡️ SECURE GATEWAY</div>
+    <h2>File Verification for: <span id="game-name" class="game-display">Loading...</span></h2>
+    <p class="subtitle">Verifying digital signatures and cloud integrity. Please wait.</p>
     
     <div class="ad-container">
-        
         <script type="text/javascript">
             atOptions = {
-                'key' : '29688544',
+                'key' : '31a0ae1f292dff183db1d181d1c9997d',
                 'format' : 'iframe',
-                'height' : 250,
-                'width' : 300,
+                'height' : 90,
+                'width' : 728,
                 'params' : {}
             };
         </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/29688544/invoke.js"></script>
-
+        <script type="text/javascript" src="https://www.highperformanceformat.com/31a0ae1f292dff183db1d181d1c9997d/invoke.js"></script>
     </div>
 
-    <div id="countdown" class="timer">يرجى الانتظار: <span id="seconds">5</span> ثوانٍ...</div>
-    <div id="check" class="checkmark">✓</div>
+    <div class="status-wrapper">
+        <div id="countdown" class="timer">Scanning package... <span class="box"><span id="seconds">5</span>s</span></div>
+        <div id="check" class="checkmark">✓ File Verified. No threats detected.</div>
+    </div>
 
-    <a href="https://itch.io" id="download-btn" class="btn">اضغط هنا للدخول للعبة</a>
+    <div class="buttons-wrapper">
+        <a href="https://youtube.com/@ayman_dev" target="_blank" id="youtube-btn" class="btn btn-youtube">🔴 Subscribe to Dev (Optional)</a>
+        
+        <button id="download-btn" class="btn btn-download" onclick="triggerSmartlink()">📥 Access Download Link</button>
+    </div>
 </div>
 
 <script>
-    var timeLeft = 5; // عدد ثواني الانتظار
+    const urlParams = new URLSearchParams(window.location.search);
+    const gameName = decodeURIComponent(urlParams.get('game') || 'Premium Game File');
+    const downloadUrl = decodeURIComponent(urlParams.get('url') || 'https://itch.io');
+
+    document.getElementById('game-name').textContent = gameName;
+
+    // العداد الزمني
+    var timeLeft = 5; 
     var timerElement = document.getElementById('countdown');
     var secondsElement = document.getElementById('seconds');
     var checkElement = document.getElementById('check');
-    var buttonElement = document.getElementById('download-btn');
+    var youtubeBtn = document.getElementById('youtube-btn');
+    var downloadBtn = document.getElementById('download-btn');
 
     var downloadTimer = setInterval(function(){
         timeLeft--;
@@ -109,9 +219,19 @@
             clearInterval(downloadTimer);
             timerElement.style.display = 'none'; 
             checkElement.style.display = 'block'; 
-            buttonElement.style.display = 'inline-block'; 
+            youtubeBtn.style.display = 'inline-block'; 
+            downloadBtn.style.display = 'inline-block'; 
         }
     }, 1000);
+
+    // الدالة السحرية للربح من الـ Smartlink مع إعطاء اللاعب ملف اللعبة بنفس الوقت
+    function triggerSmartlink() {
+        // 1. فتح رابط الـ Smartlink الخاص بك في صفحة جديدة لتحقيق الربح الإجباري
+        window.open("https://www.effectivecpmnetwork.com/ybb0qmae1w?key=533cf0d827a1c2debb099bb5aec916e4", "_blank");
+        
+        // 2. تحويل الصفحة الحالية فوراً إلى رابط تحميل اللعبة الحقيقي (القادم من تيرمكس) لكي يستلم اللاعب ملفه
+        window.location.href = downloadUrl;
+    }
 </script>
 
 </body>
